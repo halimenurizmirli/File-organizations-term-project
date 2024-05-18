@@ -13,4 +13,3 @@ password
 qwerty
 tequiero
 test
-Term
