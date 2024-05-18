@@ -9,7 +9,6 @@ public class PasswordIndexer {
 	public static void main(String[] args) throws IOException {
 		FileHandler fileHandler = new FileHandler();
         PasswordProcessor passwordProcessor = new PasswordProcessor();
-      //  deleteFirst();
 
         // "Unprocessed-Passwords" klasöründeki dosyaları listele
         List<File> files = fileHandler.listFilesInDirectory("Unprocessed-Passwords");
@@ -19,14 +18,7 @@ public class PasswordIndexer {
         }
         System.out.println("bitti.");
 	}
-	public static void deleteFirst() throws IOException {
-//		Path klasor = Paths.get("Index");
-//		Files.delete(klasor);
-		File folder = new File("Index");
-		for (File dosya : folder.listFiles()) {
-            dosya.delete();
-        }
-	}
+	
 	
 	
 	
