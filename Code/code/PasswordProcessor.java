@@ -1,6 +1,7 @@
 package code;
 
 import java.io.*;
+import java.nio.file.*;
 import java.security.*;
 import java.util.*;
 
@@ -78,7 +79,7 @@ public class PasswordProcessor {
 	}
 
 	// Klasördeki mevcut dosyalar arasında bir dosya seçer veya yenisini oluşturur
-	private File getOutputFile(File folder) {
+	private File getOutputFile(File folder) throws IOException {
 		File[] files = folder.listFiles((dir, name) -> name.startsWith("passwords_"));
 		if (files == null || files.length == 0) {
 			return new File(folder, "passwords_1.txt");// Klasörde hiç dosya yoksa ilk dosyayı oluştur
@@ -94,17 +95,22 @@ public class PasswordProcessor {
 	}
 
 	// Bir dosyadaki satır sayısını döner
-	private int getFileLineCount(File file) {
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			int lines = 0;
-			while (br.readLine() != null) {
-				lines++;
-			}
-			return lines;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return 0;
-		}
+	private int getFileLineCount(File file) throws IOException {
+		
+		long lineCount = Files.lines(Paths.get(file.getPath())).count();
+		return (int) lineCount;
 	}
+//	private int getFileLineCount(File file) {
+//		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+//			int lines = 0;
+//			while (br.readLine() != null) {
+//				lines++;
+//			}
+//			return lines;
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return 0;
+//		}
+//	}
 
 }
